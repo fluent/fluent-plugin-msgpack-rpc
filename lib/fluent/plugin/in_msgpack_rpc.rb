@@ -36,7 +36,7 @@ class MessagePackRPCInput < Input
 
   def start
     @server = MessagePack::RPC::Server.new
-    @server.listen '0.0.0.0', @port, Server.new
+    @server.listen @bind, @port, Server.new
     @thread = Thread.new {
       @server.run
     }
