@@ -1,5 +1,7 @@
-class MessagePackRPCInput < Fluent::Input
-  Fluent::Plugin.register_input('msgpack_rpc', self)
+module Fluent
+
+class MessagePackRPCInput < Input
+  Plugin.register_input('msgpack_rpc', self)
 
   def initialize
     require 'msgpack/rpc'
@@ -8,7 +10,7 @@ class MessagePackRPCInput < Fluent::Input
   end
 
   def configure(conf)
-    raise Fluent::ConfigError, "Missing 'port' parameter for msgpack_rpc" unless conf.has_key?('port')
+    raise ConfigError, "Missing 'port' parameter for msgpack_rpc" unless conf.has_key?('port')
     @port = conf['port']
     @port = @port.to_i
 
@@ -30,18 +32,20 @@ class MessagePackRPCInput < Fluent::Input
 
   class Server
     def log(tag, time, record)
-      time = Fluent::Engine.now if time == 0
-      Fluent::Engine.emit(tag, Fluent::Event.new(time, record))
+      time = Engine.now if time == 0
+      Engine.emit(tag, Event.new(time, record))
       nil
     end
 
     def logs(tag, entries)
-      current = Fluent::Engine.now
+      current = Engine.now
       # TODO: need type validation for entries?
-      Fluent::Engine.emit_array(tag, entries.map { |e|
+      Engine.emit_array(tag, entries.map { |e|
         e[0] = current if e[0] == 0
-        Fluent::Event.new.from_msgpack(e)
+        Event.new.from_msgpack(e)
       })
     end
   end
+end
+
 end
