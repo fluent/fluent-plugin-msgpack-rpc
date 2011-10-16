@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{fluent-plugin-msgpack-rpc}
-  s.version = "0.1.0"
+  s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Nobuyuki Kubota}]
@@ -18,12 +18,14 @@ Gem::Specification.new do |s|
     "AUTHORS",
     "Rakefile",
     "VERSION",
-    "lib/fluent/plugin/in_msgpack_rpc.rb"
+    "lib/fluent/plugin/in_msgpack_rpc.rb",
+    "test/plugin/in_msgpack_rpc.rb"
   ]
   s.homepage = %q{http://github.com/fluent}
   s.require_paths = [%q{lib}]
   s.rubygems_version = %q{1.8.6}
   s.summary = %q{Input plugin for Fluent using MessagePack-RPC}
+  s.test_files = [%q{test/plugin/in_msgpack_rpc.rb}]
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
