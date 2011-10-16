@@ -23,6 +23,16 @@ class MessagePackRPCInputTest < Test::Unit::TestCase
     assert_equal '127.0.0.1', d.instance.bind
   end
 
+  def test_missing_port
+    assert_raise(Fluent::ConfigError){
+      d = create_driver(%[
+        bind 127.0.0.1
+      ])
+    }
+  end
+
+  # TODO: Add test for invalid 'bind' parameter
+
   def test_default_time
     d = create_driver
 

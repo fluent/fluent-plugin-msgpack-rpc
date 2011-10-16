@@ -22,19 +22,15 @@ class MessagePackRPCInput < Input
 
   def initialize
     require 'msgpack/rpc'
-
-    @bind = '0.0.0.0'
+    super
   end
 
-  # TODO: Use Configurable
-  attr_reader :port, :bind
+  config_param :port, :integer
+  config_param :bind, :string, :default => '0.0.0.0'
 
   def configure(conf)
-    raise ConfigError, "Missing 'port' parameter for msgpack_rpc" unless conf.has_key?('port')
-    @port = conf['port']
-    @port = @port.to_i
-
-    @bind = conf['bind'] || @bind
+    # TODO: Reject invalid bind parameter
+    super
   end
 
   def start
