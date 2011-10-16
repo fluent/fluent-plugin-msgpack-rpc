@@ -26,6 +26,9 @@ class MessagePackRPCInput < Input
     @bind = '0.0.0.0'
   end
 
+  # TODO: Use Configurable
+  attr_reader :port, :bind
+
   def configure(conf)
     raise ConfigError, "Missing 'port' parameter for msgpack_rpc" unless conf.has_key?('port')
     @port = conf['port']
@@ -50,7 +53,7 @@ class MessagePackRPCInput < Input
   class Server
     def log(tag, time, record)
       time = Engine.now if time == 0
-      Engine.emit(tag, Event.new(time, record))
+      Engine.emit(tag, time, record)
       nil
     end
 
@@ -59,7 +62,7 @@ class MessagePackRPCInput < Input
       # TODO: need type validation for entries?
       Engine.emit_array(tag, entries.map { |e|
         e[0] = current if e[0] == 0
-        Event.new.from_msgpack(e)
+        e
       })
     end
   end
