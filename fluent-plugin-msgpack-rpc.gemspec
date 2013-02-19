@@ -18,5 +18,6 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "fluentd", "~> 0.10.0"
   gem.add_dependency "msgpack-rpc", "~> 0.5.1"
-  gem.add_development_dependency "rake"
+  gem.add_development_dependency "rake", ">= 0.9.2"
+  gem.add_development_dependency "flexmock", ">= 1.2.0"
 end
