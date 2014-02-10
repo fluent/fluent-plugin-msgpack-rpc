@@ -1,7 +1,7 @@
 About This Plugin
 -----------------
 
-This plugin is an input plugin for Fluent.
+This plugin is an input plugin for Fluentd (http://fluentd.org/).
 All applications using MessagePack-RPC client can send events to Fluent by using this plugin.
 
 How to Configure
